@@ -1,18 +1,12 @@
-<!doctype html>
-<html lang="ko">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport"
-	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-</head>
-<body>
-	<!-- 4. post_list.html에서 for loop사용해 전달된 posts변수 순환 및 출력 -->
+{% extends 'common/base.html' %}
+
+{% block content %}
+	<!--4. post_list.html에서 for loop사용해 전달된 posts변수 순환 및 출력-->
+	<!--
+		include
+			https://docs.djangoproject.com/en/1.11/ref/templates/builtins/#include
+	-->
 	{% for post in posts %}
-	<span>{{ post.id }}</span>
-    <spang> {{ post.photo.url}}</spang>
-    <img src="post.pohto.url" alt="">
+		{% include 'include/post.html' %}
 	{% endfor %}
-</body>
-</html>
+{% endblock %}
