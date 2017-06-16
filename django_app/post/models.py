@@ -1,35 +1,3 @@
-# # shift + Command + F : 프로젝트내에서 모두 찾기
-# In [1]: u = User.objects.create_user('phj')
-#
-# In [2]: u.set_password('qkrguswns')
-#
-# In [3]: u.save()
-#
-# In [4]: p1 = Post.objects.create(author=u)
-#
-# In [5]: p1
-# Out[5]: <Post: Post object>
-#
-# In [6]: u2 = User.objects.create_user('lsj')
-#
-# In [7]: u2.first_name = '수진'
-#
-# In [8]: u2.last_name = '이'
-#
-# In [9]: u2.save()
-#
-# In [10]: u.post_set.all()
-# Out[10]: <QuerySet [<Post: Post object>]>
-#
-# In [11]: p1.comment_set.create(author=u2, content='댓글을달자')
-# Out[11]: <Comment: Comment object>
-#
-# In [12]: Comment.objects.create(post=p1, author=u2, content='댓글을 다시 달자')
-# Out[12]: <Comment: Comment object>≤
-
-from django.db import models
-from django.conf import settings
-
 """
 member application생성
     settings.AUTH_USER_MODEL모델 구현
