@@ -62,6 +62,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Custom User (default: auth.User)
 AUTH_USER_MODEL = 'member.User'
+LOGIN_URL = 'member:login'
 
 # Application definition
 INSTALLED_APPS = [
@@ -103,6 +104,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # Custom context processors
+                'member.context_processors.forms'
             ],
         },
     },

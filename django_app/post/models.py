@@ -14,12 +14,21 @@ class Post(models.Model):
     photo = models.ImageField(upload_to='post', blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
+    my_comment = models.OneToOneField(
+        'Comment',
+        blank=True,
+        null=True,
+        related_name='+'
+    )
     like_users = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         related_name='like_posts',
         through='PostLike',
     )
     tags = models.ManyToManyField('Tag', blank=True)
+
+    class Meta:
+        ordering = ['-pk', ]
 
     def add_comment(self, user, content):
         # 자신을 post로 갖고, 전달받은 user를 author로 가지며

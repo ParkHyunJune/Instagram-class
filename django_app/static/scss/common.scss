@@ -11,7 +11,7 @@
 }
 .field-wrapper {
   margin-bottom: 10px;
-
+  
   ul.errors {
     font-size: 11px;
     color: red;
@@ -22,6 +22,10 @@
     font-size: 11px;
   }
   input[type=text], input[type=password] {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  input[type=file] {
     width: 100%;
     box-sizing: border-box;
   }
