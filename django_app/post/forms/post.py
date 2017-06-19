@@ -1,9 +1,11 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AnonymousUser
 
 from ..models import Post, Comment
 
 User = get_user_model()
+
 
 class PostForm(forms.ModelForm):
     # 생성자를 조작해서 실제 Post의 photo필드는 blank=True
@@ -33,9 +35,9 @@ class PostForm(forms.ModelForm):
         # 전달된 키워드인수중 'author'키 값을 가져오고, 기존 kwargs dict에서 제외
         author = kwargs.pop('author', None)
 
-        # self.instance.pk 가 존재하면 update 중
-        # author 가 None이 아닐경우
-        # 두 가지중 하나이면 self.instance.author 에 전달된 author 또는 None 값을 할당
+        # self.instance.pk가 존재하지 않거나(새로 생성하거나)
+        # author가 User인스턴스일 경우
+        # 두 가지중 하나이면 self.instance.author에 전달된 author값을 할당(User거나 None일 수 있음)
         if not self.instance.pk or isinstance(author, User):
             self.instance.author = author
         # super()의 save()호출
@@ -55,7 +57,7 @@ class PostForm(forms.ModelForm):
             else:
                 instance.my_comment = Comment.objects.create(
                     post=instance,
-                    author=author,
+                    author=instance.author,
                     content=comment_string
                 )
             # OTO필드의 저장을 위해 Post의 save()호출
