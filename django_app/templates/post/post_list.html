@@ -6,10 +6,41 @@
 		include
 			https://docs.djangoproject.com/en/1.11/ref/templates/builtins/#include
 	-->
+	<div>
+		<a href="{% url 'post:post_create' %}" class="btn">Post Create</a>
+	</div>
 	{% for post in posts %}
-		<div>
-			<a href="{% url 'post:post_create' %}" class="btn">Post Create</a>
-		</div>
 		{% include 'include/post.html' with type='list' %}
 	{% endfor %}
+	<!--
+		1. 현재 페이지 넘버를 보여줌
+		2. 다음 페이지 넘버를 보여줌
+	-->
+    <div class="test">{{ request.GET }}</div>
+    <div class="test">
+        {% for k, v_list in request.GET.items %}{% for v in v_list %}&{{ k }}={{ v }}{% endfor %}{% endfor %}
+    </div>
+
+
+    <!--이전 페이지로 가는 링크-->
+	{% if posts.has_previous %}
+    <!--첫 페이지로 가는 링크-->
+    <a href="{{requst.path}}?page=1" class="btn">처음</a>
+    <a href="{{requst.path}}?page={{ posts.previous_page_number }}" class="btn">이전 ({{ posts.previous_page_number }}페이지)</a>
+	{% endif %}
+
+    <!--현재 페이지를 표시-->
+    <a class="btn">{{ posts.number }}페이지</a>
+
+    <!--다음 페이지로 가는 링크-->
+	{% if posts.has_next %}
+	<a href="{{request.path}}?page={{ posts.next_page_number }}" class="btn">다음 ({{ posts.next_page_number }}페이지)</a>
+    <!-- 마지막 페이지로 가는 링크 -->
+    <a href="{{ request.path }}?page={{ posts.paginator.num_pages }}" class="btn">끝</a>
+	{% endif %}
+
+
+
 {% endblock %}
+
+

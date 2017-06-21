@@ -106,7 +106,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 # Custom context processors
-                'member.context_processors.forms'
+                'member.context_processors.forms',
             ],
         },
     },
