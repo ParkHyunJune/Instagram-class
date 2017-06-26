@@ -268,3 +268,4 @@ def hashtag_post_list(request, tag_name):
         'posts_count': posts_count,
     }
     return render(request, 'post/hashtag_post_list.html', context)
+

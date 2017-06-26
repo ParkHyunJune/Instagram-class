@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="{% static 'css/common.css' %}">
 	<link rel="stylesheet" href="{% static 'css/layout.css' %}">
 	<link rel="stylesheet" href="{% static 'css/post.css' %}">
+	<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 	<title>Instagram</title>
 </head>
 <body>
@@ -45,7 +46,7 @@
 					<a href="#">
 						<img src="{% static 'images/icon_heart.png' %}" alt="">
 					</a>
-					<a href="#">
+					<a href="{% url 'member:my_profile' %}">
 						<img src="{% static 'images/icon_profile.png' %}" alt="">
 					</a>
 				</div>
@@ -64,14 +65,10 @@
 					{% else %}
 					<form action="{% url 'member:login' %}" method="POST" class="form-inline-login">
 						{% csrf_token %}
-						<!--<label for="id-login-username">ID:</label>-->
-						<!--<input id="id-login-username" type="text" name="username">-->
-						<!--&nbsp;-->
-						<!--<label for="id-login-password">PW:</label>-->
-						<!--<input id="id-login-password" type="password" name="password">-->
 						{{ login_form }}
 						<button type="submit" class="btn">로그인</button>
 						<a href="{% url 'member:signup' %}" class="btn">회원가입</a>
+						<a href="https://www.facebook.com/v2.9/dialog/oauth?client_id={{ facebook_app_id }}&scope=user_friends,public_profile,email&redirect_uri={{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'member:facebook_login' %}" class="btn btn-primary">페이스북으로 로그인</a>
 					</form>
 					<!--<a href="{% url 'member:login' %}" class="btn">로그인</a>-->
 					{% endif %}
